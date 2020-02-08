@@ -1,0 +1,78 @@
+<html>
+    <script>
+        let namabuah=['apple','grape','orange']
+        let hargabuah=[10000,150000,20000]
+        let stokbuah=[5,8,9]
+        let jumlahdibeli=[]
+        let totalharga=[]
+do{
+    let menu=['daftar buah','menambah buah','menghapus buah','membeli buah']
+    // let buahdibeli=[]
+        
+    // pilih menu
+    let outputdaftarmenu=''
+    for(i=0;i<menu.length;i++){
+        outputdaftarmenu+=(i+1)+'. '+menu[i]+'\n'
+    }
+    let daftarmenu=prompt('mau menu apa hayo?\n'+outputdaftarmenu)
+    
+    let outputdaftarbuah=''
+    for(j=0;j<namabuah.length;j++){
+        outputdaftarbuah+=((j+1)+'. '+namabuah[j]+' | '+stokbuah[j]+' | '+hargabuah[j]+'\n')
+    }
+
+    //daftar buah
+    if(daftarmenu==1){
+        let daftarbuah=alert('daftar buah\n'+outputdaftarbuah)
+    }
+    
+    //menambah buah
+    else if(daftarmenu==2){
+        let tambahbuahnama=prompt('mau tambahin buah apa?')
+        let tambahbuahstok=parseInt(prompt('berapa stocknya?'))
+        let tambahbuahharga=parseInt(prompt('harganya berapa?'))
+        namabuah.push(tambahbuahnama)
+        stokbuah.push(tambahbuahstok)
+        hargabuah.push(tambahbuahharga)
+        let daftarbuah=alert('daftar buah\n'+outputdaftarbuah)
+    }
+
+    //menghapus buah
+    else if(daftarmenu==3){
+        let outputdaftarbuah2=''
+        for(j=0;j<namabuah.length;j++){
+            outputdaftarbuah2+=((j+1)+'. '+namabuah[j]+'\n')
+        }
+        let hapusbuah=prompt('mau hapus buah apa?\ndaftar buah\n'+outputdaftarbuah2)
+        namabuah.splice(0,hapusbuah)
+        
+    }
+    
+    //membeli buah
+    else if(daftarmenu==4){
+        let outputbeli=''
+        let total=''
+        let hargatotal=''
+        for(k=0;k<namabuah.length;k++){
+            outputbeli+=prompt('mau beli '+namabuah[k]+' berapa?')
+            jumlahdibeli.push(outputbeli)
+            totalharga.push(outputbeli*hargabuah)
+        }
+        for(i=0;i<namabuah.length;i++){
+            total+=namabuah[i]+' '+jumlahdibeli[i]+' x '+hargabuah[i]+' = '+jumlahdibeli[i]*hargabuah[i]+'\n'
+        }
+        let totalbayar=alert('daftar belanja\n'+total)
+    }
+
+}
+while(confirmakhir=confirm('kembali ke menu awal?'))
+
+
+
+
+  //masuk ke daftar lagi
+    //for 1>> untuk keseluruhan
+    //for 2>> untuk ke daftar buah, lalu di daftar buah kasih confirm kembali ke menu awal
+    //jadi intinya if tiap menu di kasih if jadi balik lagi ke daftar buah
+    </script>
+</html>

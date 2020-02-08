@@ -1,0 +1,184 @@
+<html>
+    <script>
+    
+    var data=[
+        {
+            category:'cepat saji',
+            name:'Noodle',
+            stock:8,
+            exp:'2020',
+            price:20000
+        },
+        {
+            category:'pakaian',
+            name:'Hoodie',
+            stock:7,
+            size:'L',
+            price:15000
+        },
+        {
+            category:'elektronik',
+            name:'Headphone',
+            stock:8,
+            warranty:'yes',
+            price:20000
+        },
+        {
+            category:'buah',
+            name:'Apel',
+            stock:8,
+            sugarlvl:'High',
+            price:10000
+        }
+    ]
+    class Cartproduct{
+        constructor(nama,jumlah,harga){
+            this.nama=nama,
+            this.jumlah=jumlah,
+            this.harga=harga
+        }
+    }
+    var cart=[]
+    function productlist(){
+        var output='Daftar Produk\n\n'
+        data.forEach((val,index)=>{
+        if(val.category==='cepat saji'){
+            var addproperties=' | exp : '
+            var addvalue=val.exp
+        }
+        else if(val.category==='pakaian'){
+            var addproperties=' | size : '
+            var addvalue=val.size
+        }
+        else if(val.category==='elektronik'){
+            var addproperties=' | warranty : '
+            var addvalue=val.warranty
+        }
+        else if(val.category==='buah'){
+            var addproperties=' | sugar lvl : '
+            var addvalue=val.sugarlvl
+        }
+        output+=(index+1)+'. name : '+val.name+' | stock : '+val.stock+addproperties+addvalue+' | price : '+val.price+'\n'
+    })
+    return output
+    }
+    function sumtotalharga(){
+        var totalharga=0
+        cart.forEach((val, index)=>{
+            totalharga+=val.jumlah*val.harga
+        })
+            return totalharga
+        }
+    function strukbelanja(){
+        var strukbelanja='Struk Belanja\n=============================================\n'
+        cart.forEach((val,index)=>{
+        strukbelanja+=(index+1)+'. '+val.nama+' = '+val.jumlah+' X Rp.'+val.harga+'= '+(val.jumlah*val.harga)+'\n'
+        })
+        strukbelanja+='=======================================+\n'
+        strukbelanja+='total seluruhnya Rp. '+sumtotalharga()
+        return strukbelanja
+    }
+    do{
+        do{
+            var mainmenu=prompt('Mau menu apa?\n1. Lihat Daftar Produk\n2. Tambah Produk\n3. Hapus Produk\n4. Beli Produk\n5. Keluar')
+            if(mainmenu<1||mainmenu>5){
+                alert('salah pilih menu sis')
+            }
+        }
+        while(mainmenu<1||mainmenu>5)
+
+        if(mainmenu==1){
+            alert(productlist())
+        }
+        else if(mainmenu==2){
+            var kategoritambah=prompt('Mau tambah kategori apa?\n\n1. Cepat Saji\n2. Pakaian\n3. Elektronik\n4. Buah')
+            var addname=prompt('Apa nama produknya?')
+            var addstock=prompt('Berapa stocknya?')
+            if(kategoritambah==1){
+                var addcategory='cepat saji'
+                var addexp=prompt('Kapan expirednya?')
+            }
+            else if(kategoritambah==2){
+                var addcategory='pakaian'
+                var addsize=prompt('Ukuran berapa?')
+            }
+            else if(kategoritambah==3){
+                var addcategory='elektronik'
+                var addwarranty=prompt('Apa ada garansinya?\n1. ada\n2. tidak ada')
+                if(addwarranty==1){
+                    var warrantyval='yes'
+                }
+                else{
+                    var warrantyval='no'
+                }
+            }
+            else{
+                var addcategory='buah'
+                var addsugar=prompt('Berapa sugar levelnya?')
+            }
+            var addprice=prompt('Berapa harganya?')
+            data.push({category:addcategory,name:addname,stock:addstock,exp:addexp,size:addsize,warranty:warrantyval,sugarlvl:addsugar,price:addprice})
+            alert(productlist())
+        }
+        else if(mainmenu==3){
+            var indexdeleteproduct=prompt(productlist())-1
+            var konfirmasihapus=confirm('yakin kamu hapus '+data[indexdeleteproduct].name+' darisini :(')
+            if(konfirmasihapus){
+                data.splice(indexdeleteproduct,1)
+                alert('berhasil hapus produk')
+            }
+            else{
+                alert('tidak jadi hapus')
+            }
+        }
+        else if(mainmenu==4){
+        do{    
+            do{
+                var pilihanbelanja=prompt(productlist())-1
+                if(pilihanbelanja<0||pilihanbelanja>data.length){
+                    alert('salah input pilihan produk')
+                }
+            }
+            while(pilihanbelanja<0||pilihanbelanja>data.length)
+            do{
+                var qty=parseInt(prompt('mau beli '+data[pilihanbelanja].name+' berapa?'))
+                if(qty>data[pilihanbelanja].stock){
+                    alert('input ulang, stok tidak mencukupi')
+                }
+                else{
+                    data[pilihanbelanja].stock-=qty
+                    break
+                }
+            }while(qty>data[pilihanbelanja].stock)
+            var adadata=false
+            var index=-1
+            cart.forEach((val,index1)=>{
+                if (val.name===data[pilihanbelanja].name){
+                    adadata=true
+                    index=index1
+                }
+            })
+            if(adadata){
+                cart[index].jumlah+=qty
+            }
+            else{
+                cart.push(new Cartproduct(data[pilihanbelanja].name,qty,data[pilihanbelanja].price))
+            }
+            var konfirmasibelanja=confirm('mau belanja lagi ga?')
+        }
+        while(konfirmasibelanja)
+            alert(strukbelanja())
+        }
+        else{
+            alert('terimakasih sudah berkunjung :)')
+            break
+        }
+        var konfirmasiakhir=confirm('kembali ke menu awal?')
+        if(!konfirmasiakhir){
+            alert('terimakasih sudah berkunjung :)')
+        }
+    }
+    while(konfirmasiakhir)
+    
+    </script>
+</html>

@@ -1,0 +1,64 @@
+<html>
+<script>
+
+//tugas no.1
+var apel=prompt('Berapa jumlah Apel?')
+var anggur=prompt('Berapa jumlah Anggur?')
+var jeruk=prompt('Berapa jumlah Jeruk?')
+var ketersediaanApel=''
+var ketersediaanAnggur=''
+var ketersediaanJeruk=''
+var stokApel=5
+var stokAnggur=7
+var stokJeruk=8
+var hargaApel=(apel*10000)
+var hargaAnggur=(anggur*15000)
+var hargaJeruk=(jeruk*20000)
+var totalHarga=(hargaApel+hargaAnggur+hargaJeruk)
+
+if(apel<=stokApel||apel==null){
+    ketersediaanApel='ada'
+} 
+else {
+    ketersediaanApel='kosong'
+}
+
+if(anggur<=stokAnggur||anggur==null){
+    ketersediaanAnggur='ada'
+} 
+else {
+    ketersediaanAnggur='kosong'
+}
+
+if(jeruk<=stokJeruk||jeruk==null){
+    ketersediaanJeruk='ada'
+} 
+else {
+    ketersediaanJeruk='kosong'
+}
+
+if(ketersediaanApel=='ada'&&ketersediaanAnggur=='ada'&&ketersediaanJeruk=='ada'){
+    alert('Detail Belanja'+'\n'+'\n'
+    +'Apel : '+apel+' x Rp 10000 = Rp '+hargaApel+'\n'
+    +'Anggur : '+anggur+' x Rp 15000 = Rp '+hargaAnggur+'\n'
+    +'Jeruk : '+jeruk+' x Rp 20000 = Rp '+hargaJeruk+'\n'+'\n'
+    +'Total : Rp '+totalHarga)
+    
+    var uangPembayaran=prompt('silahkan masukkan uang anda')
+
+    if((ketersediaanApel=='ada'&&ketersediaanAnggur=='ada'&&ketersediaanJeruk=='ada')&&(uangPembayaran>totalHarga)){
+    alert('terimakasih atas pembayarannya, kembalian anda adalah '+parseInt(uangPembayaran-totalHarga))
+    }
+    else if((ketersediaanApel=='ada'&&ketersediaanAnggur=='ada'&&ketersediaanJeruk=='ada')&&(uangPembayaran<totalHarga)){
+    alert('pesanan anda belum dapat diproses, pembayaran kurang '+(Math.abs(uangPembayaran-totalHarga)))
+    }
+    else{
+    alert('terimakasih atas pembayarannya')
+    }
+}
+else{
+    alert('maaf stok tidak mencukupi, transaksi dibatalkan')
+}
+
+</script>
+</html>

@@ -1,0 +1,148 @@
+<html>
+    <script>
+    alert('selamat datang di toko buah segar')
+    class buah{
+        constructor(nama,stok,harga){
+            this.nama=nama,
+            this.harga=harga,
+            this.stok=stok
+        }
+    }
+    class cartbuah{
+        constructor(nama,jumlah,harga){
+            this.nama=nama
+            this.jumlah=jumlah
+            this.harga=harga
+        }
+    }
+    var fruitlist=[
+        new buah('apel',5,1000),
+        new buah('anggur',5,2000),
+        new buah('berry',5,3000),
+        new buah('pisang',5,4000),
+    ]
+    var cart=[]
+    function daftarbuah(){
+    var output='Daftar list buah\n'
+        for(let i=0;i<fruitlist.length;i++){
+            output+=(i+1)
+                    +'. '
+                    +fruitlist[i].nama
+                    +' dengan stok '
+                    +fruitlist[i].stok
+                    +' Rp.'
+                    +fruitlist[i].harga
+                    +'\n'
+            }
+        return output
+    }
+    function sumtotalharga(){
+    var totalharga=0
+        for(let i=0;i<cart.length;i++){
+            totalharga+=cart[i].harga*cart[i].jumlah
+        }
+        return totalharga
+    }
+    function printstrukbelanja(){
+    var strukbelanja='Struk belanja\n=====================================\n'
+        for(let i=0;i<cart.length;i++){
+            strukbelanja+=(i+1)
+                            +'. '
+                            +cart[i].nama
+                            +' = '+cart[i].jumlah
+                            +' X Rp.'
+                            +cart[i].harga
+                            +'= '
+            +(cart[i].jumlah*cart[i].harga)+'\n'
+        }
+        strukbelanja+='=======================================+\n'
+        strukbelanja+='total seluruhnya Rp. '+sumtotalharga()
+        return strukbelanja
+    }
+    function printdata(kondisi){
+            // if(kondisi==='struk'){
+            //     var strukbelanja='Struk belanja\n=====================================\n'
+            //     for(let i=0;i<cartbuah.length;i++){
+            //     strukbelanja+=(i+1)+'. '+cartbuah[i]+' = '+cartqty[i]+' X Rp.'+cartharga[i]+'= '
+            //     +(cartqty[i]*cartharga[i])+'\n'
+            //     }
+            //     strukbelanja+='=======================================+\n'
+            //     strukbelanja+='total seluruhnya Rp. '+sumtotalharga()
+            //     return strukbelanja
+            // }
+            // else{
+            //     return daftarbuah()
+            // }
+        }
+    do{
+        do{
+            var menuutama=prompt('1.Daftar buah\n2.tambah buah\n3.hapus buah\n4.beli buah\n5.exit')
+            if(menuutama<1||menuutama>5){
+                alert('salah input menu utama')
+            }
+        } while(menuutama<1||menuutama>5)
+
+            if(menuutama==1){
+                alert(daftarbuah())
+            }
+            else if(menuutama==2){
+                var tambahbuah=prompt('masukkan nama buah')
+                var jumlahbuah=prompt('masukkan jumlah buah')
+                var hargabuah=prompt('masukkan harga buah')
+                fruitlist.push(new buah(tambahbuah,jumlahbuah,hargabuah))
+                    alert(daftarbuah())
+            }
+            else if(menuutama==3){
+                var indexhapusbuah=prompt(daftarbuah())-1
+                var konfirmasihapus=confirm('yakin kamu hapus buah '
+                                            +fruitlist[indexhapusbuah].nama
+                                            +' darisini :(')
+                if(konfirmasihapus){
+                    fruitlist.splice(indexhapusbuah,1)
+                    alert('berhasil hapus buah')
+                }
+                else{
+                    alert('tidak jadi hapus')
+                }
+                alert(daftarbuah())
+            }
+            else if(menuutama==4){
+                do{
+                    do{ 
+                        var pilihanbelanja=prompt(daftarbuah())-1
+                        if(pilihanbelanja<=0||pilihanbelanja>fruitlist.length){
+                        alert('salah input pilihan buah')
+                        }
+                    }
+                    while(pilihanbelanja<=0||pilihanbelanja>fruitlist.length)
+                    do{
+                        var qty=prompt('mau beli '
+                                        +fruitlist[pilihanbelanja].nama
+                                        +' berapa?')
+                        if(qty>fruitlist[pilihanbelanja].stok){
+                            alert('input ulang, stok tidak mencukupi')
+                        }
+                        else{
+                            fruitlist[pilihanbelanja].stok-=qty
+                            break
+                        }
+                }while(true)
+                cart.push(new cartbuah (fruitlist[pilihanbelanja].nama,
+                                        qty,
+                                        fruitlist[pilihanbelanja].harga))
+                var konfirmasibelanja=confirm('mau belanja lagi ga?')
+                }
+                while(konfirmasibelanja)
+            alert(printstrukbelanja())
+            }
+            else{
+                alert('terimakasih telah berkunjung ke toko kami')
+                break
+            }
+        var konfirmasikembali=confirm('kembali ke menu utama?')
+            if(!konfirmasikembali){
+                alert('terimakasih telah berkunjung ke toko kami')
+            }
+    }while(konfirmasikembali)
+    </script>
+</html>

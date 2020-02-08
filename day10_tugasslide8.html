@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <p>Ketik kalimat:</p>
+        <p><input type="kalimat">
+        <p>Karakter yang dicari:</p>
+        <p><input type="karakter">
+    </form>
+    <button onclick="fungsiKu()"> Klik! </button>
+        <p id="jumlah"> Hasil </p>
+</body>
+<script>
+function fungsiKu() {
+    let input1 = document.getElementById("form").elements[0].value.split('');
+    let input2 = document.getElementById("form").elements[1].value;
+    let output=0
+    input1.forEach(val=>{
+        if(input2==val){
+            output+=1
+        }
+    })
+document.getElementById("jumlah").innerHTML ='Jumlah '+input2+' ada sebanyak '+output+' buah '
+}
+</script>
+</html>

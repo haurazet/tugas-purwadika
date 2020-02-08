@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px;
+        }
+        table{
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Form Produk<br></th>
+                <th>Form Hewan<br></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    Nama: <input type="text"  id="namaproduk" placeholder="Ciki"> <br><br>
+                    Harga: <input type="number" id="hargaproduk" placeholder="1000"><br><br>
+                    Kondisi: <input type="radio" name="kondisi" id="" value="baru">Baru
+                    <input type="radio" name="kondisi" id="" value="second">second<br><br>
+                    Kategori: <select id="kategori"> 
+                        <option hidden value="">pilih kategori...</option>
+                        <option value="elektronik">Elektronik</option>
+                        <option value="cepatsaji">Cepat Saji</option>
+                        <option value="buah">Buah</option>
+                        <option value="pakaian">Pakaian</option>
+                    </select><br><br>
+                    <button onclick="inputdataprodukonClick()">Tambahkan</button><br>
+                </td>
+                <td>
+                    Nama: <input type="text" id="namahewan" placeholder="Kelinci"><br><br>
+                    Umur: <input type="number" id="umurhewan" placeholder="2"><br><br>
+                    Kelamin: <input type="radio" name="kelamin" id="" value="betina">Betina
+                    <input type="radio" name="kelamin" id="" value="jantan">Jantan<br><br>
+                    Status: <input type="radio" name="status" id="" value="liar">Liar
+                    <input type="radio" name="status" id="" value="peliharaan">Peliharaan<br><br>
+                    <button onclick="inputdatahewanonClick()">Tambahkan</button><br>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Data Barang<br></th>
+                <th>Data Hewan<br></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nama Produk</td>
+                                <td>Harga Produk</td>
+                                <td>Kondisi Produk</td>
+                                <td>Kategori Produk</td>
+                            </tr>
+                        </thead>
+                        <tbody id="addproduk">
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nama</td>
+                                <td>Umur</td>
+                                <td>Kelamin</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tbody id="addhewan">
+                            </tbody>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+class Produk{
+    constructor (namaP, harga, kondisi, kategori){
+        this.namaP=namaP,
+        this.harga=harga,
+        this.kondisi=kondisi,
+        this.kategori=kategori
+    }
+}
+
+class Hewan{
+    constructor (nama, umur, kelamin, status){
+        this.nama=nama,
+        this.umur=umur,
+        this.kelamin=kelamin,
+        this.status=status
+    }
+}
+var dataproduk=[]
+var datahewan=[]
+
+const inputdataprodukonClick=()=>{
+    var addnamaproduk=document.getElementById('namaproduk').value
+    var addhargaproduk=document.getElementById('hargaproduk').value
+    var addkondisi=document.getElementsByName('kondisi')[0].checked?addkondisi="Baru":"Second"
+    var addkategori=document.getElementById('kategori').value
+    var output=''
+    if(addnamaproduk==""||addhargaproduk==null||addkondisi==""||addkategori==""){
+        alert('coba input semua dulu')
+    }
+    else {
+        dataproduk.push(new Produk (addnamaproduk,addhargaproduk,addkondisi,addkategori))
+        dataproduk.forEach(val => {
+            output+=`<tr>
+                        <td>${val.namaP}</td>
+                        <td>${val.harga}</td>
+                        <td>${val.kondisi}</td>
+                        <td>${val.kategori}</td>
+                    </tr>`
+        });
+    }
+    document.getElementById('addproduk').innerHTML=output
+    console.log(output)
+}
+
+const inputdatahewanonClick=()=>{
+    var addnamahewan=document.getElementById('namahewan').value
+    var addumurhewan=document.getElementById('umurhewan').value
+    var addkelamin=document.getElementsByName('kelamin')[0].checked?addkelamin="betina":"jantan"
+    var addstatus=document.getElementsByName('status')[0].checked?addstatus="liar":"peliharaan"
+    var output=''
+    if(addnamahewan==""||addumurhewan==null||addkelamin==""||addstatus==""){
+        alert('coba input semua dulu')
+    }
+    else {
+        datahewan.push(new Hewan (addnamahewan,addumurhewan,addkelamin,addstatus))
+        datahewan.forEach(val => {
+            output+=`<tr>
+                        <td>${val.nama}</td>
+                        <td>${val.umur}</td>
+                        <td>${val.kelamin}</td>
+                        <td>${val.status}</td>
+                    </tr>`
+        });
+    }
+    document.getElementById('addhewan').innerHTML=output
+    console.log(output)
+}
+</script>
+</html>

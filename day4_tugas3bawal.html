@@ -1,0 +1,100 @@
+<html>
+<script>
+
+var stokApel=5
+var stokAnggur=7
+var stokNanas=10
+var stokDurian=2
+var output, konfirmasiAnggur, konfirmasiApel, konfirmasiNanas, konfirmasiDurian
+    totalanggur,totalapel,totalnanas,totalDurian
+var hargaAnggur=5000
+    hargaApel=10000
+    hargaNanas=2000
+    hargaDurian=30000
+var detailBelanja=('detail belanja anda adalah \n')
+var totalPembelian=(anggur*hargaAnggur+apel*hargaApel+nanas*hargaNanas+durian*hargaDurian)
+
+
+do{
+
+        do{
+        var belanja=prompt('mau belanja apa? \n1.Anggur Rp 5000\n2.Apel Rp 10000\n3.Nanas Rp 2000\n4.Durian Rp 30000')
+        if(!(belanja>0&&belanja<5)){ // kalo input bukan lebih dari nol dan krg dr 5 maka alert
+            alert('input salah')
+        }
+        }
+        while(!(belanja>0&&belanja<5)){
+
+
+    if(belanja==1){
+        
+        do{
+        var anggur=prompt('mau beli anggur berapa?')
+        if((anggur<=stokAnggur||anggur==null))
+        var konfirmasiAnggur=confirm('maaf stock tidak mencukupi, stok sekarang '+ stokAnggur)
+        }
+        while((anggur<=stokAnggur||anggur==null)){ //kalo stok tidak tersedia maka
+        }
+        var totalanggur='\nanggur: ' +anggur+' X '+hargaAnggur+' = '+(anggur*hargaAnggur)
+        }
+        
+    
+    if(belanja==2){
+        var apel=prompt('mau beli apel berapa?')
+        if(apel<=stokApel||apel==null){ //stok tersedia, maka
+        var totalapel='\napel: ' +apel+' X '+hargaApel+' = '+(apel*hargaApel)
+        }
+        else{
+        var konfirmasiApel=confirm('maaf stock tidak mencukupi, stok sekarang '+ stokApel)
+        }
+    }
+    if(belanja==3){
+        var nanas=prompt('mau beli nanas berapa?')
+        if(nanas<=stokNanas||nanas==null){ //stok tersedia, maka
+        var totalnanas='\nnanas: ' +nanas+' X '+hargaNanas+' = '+(nanas*hargaNanas)
+        }
+        else{
+        var konfirmasiNanas=confirm('maaf stock tidak mencukupi, stok sekarang '+ stokNanas)
+        }
+    }
+    if(belanja==4)
+        var durian=prompt('mau beli durian berapa?')
+        if(durian<=stokDurian||durian==null){ //stok tersedia, maka
+        var totalDurian='\ndurian: ' +durian+' X '+hargaDurian+' = '+(durian*hargaDurian)
+        }
+        else{
+        var konfirmasiDurian=confirm('maaf stock tidak mencukupi, stok sekarang '+ stokDurian)
+        }
+
+    }
+
+
+
+
+var total=(detailBelanja+'\n'+totalanggur+totalapel+totalnanas+totalDurian+'\n\nTotal: '+totalPembelian)
+var konfirmasi=confirm('pemesanan selesai, apa mau belanja lagi?')
+
+do {var uangPembayaran=prompt('silahkan masukkan uang anda')
+    if(uangPembayaran==null){
+        alert('input salah')
+    }
+}
+while(!(uangPembayaran<0&&uangPembayaran>=totalPembelian)){
+    alert('pesanan anda belum dapat diproses, pembayaran kurang '+(Math.abs(uangPembayaran-totalHarga)))
+}
+
+if(uangPembayaran>totalPembelian){
+    alert('terimakasih atas pembayarannya, kembalian anda adalah '+parseInt(uangPembayaran-totalPembelian))
+}
+else if(uangPembayaran=totalPembelian){
+    alert('terimakasih atas pembayarannya')
+}
+
+
+
+}
+while(konfirmasi)
+
+
+</script>
+</html>

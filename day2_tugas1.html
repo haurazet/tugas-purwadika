@@ -1,0 +1,48 @@
+<html>
+<script>
+
+//Tugas No.1
+var hari=485
+var totalTahun=Math.floor(hari/360)
+var totalBulan=Math.floor((hari%360)/30)
+var totalMinggu=Math.floor((hari%360-totalBulan*30)/7)
+var totalHari=hari%360-totalBulan*30
+console.log(totalTahun+' tahun, '+totalBulan+' bulan, '+totalMinggu+' minggu, '+totalHari+' hari')
+
+//Tugas No.2
+var totalUsia=49
+var perbandingan=totalUsia/(2+5)
+var usiaAndi=perbandingan*2
+var usiaBudi=perbandingan*5
+console.log('usia Andi '+(usiaAndi+2)+' dan Budi '+(usiaBudi+2))
+
+//contoh lain No.2
+var rasioandiperbudi=0.4
+var totalumur=49
+var budi=(totalumur/(rasioandiperbudi+1))
+var andi=(totalumur-budi)
+console.log(andi+2)
+console.log(budi+2)
+
+//Tugas No.3
+var jarak=120
+var waktupapasan=jarak/(60+40)
+var jampapasan=(9+Math.floor(waktupapasan))
+var menitpapasan=(waktupapasan*60%60)
+console.log(jampapasan+':'+menitpapasan)
+
+
+//Tugas No.4
+var apel=prompt('Berapa jumlah Apel?')
+var anggur=prompt('Berapa jumlah Anggur?')
+var jeruk=prompt('Berapa jumlah Jeruk?')
+
+var hargaApel=(apel*10000)
+var hargaAnggur=(anggur*15000)
+var hargaJeruk=(jeruk*20000)
+var totalHarga=(hargaApel+hargaAnggur+hargaJeruk)
+
+alert('Detail Belanja'+'\n'+'\n'+'Apel : '+apel+' x Rp 10000 = Rp '+hargaApel+'\n'+'Anggur : '+anggur+' x Rp 15000 = Rp '+hargaAnggur+'\n'+'Jeruk : '+jeruk+' x Rp 20000 = Rp '+hargaJeruk+'\n'+'\n'+'Total : Rp '+totalHarga)
+
+</script>
+</html>

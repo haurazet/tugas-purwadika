@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 7px;
+            table-layout: fixed;
+        }
+        table{
+            /* margin: 0 auto; */
+            text-align: left;
+            table-layout: fixed;
+            /* width: 100%; */
+            max-width: 100%;
+        }
+
+        fieldset{
+            margin-top:0 auto;
+            margin-left: 350px;
+            margin-right: 350px;
+            padding: 7px;
+        } 
+    </style>
+</head>
+<body>
+
+    <fieldset>
+        <legend>Filter</legend>
+        Nama: <input type="text" id="nama" oninput="filternama()"><br><br>
+        Harga: <input type="number" id="minharga" oninput="filterhargamin()"> - <input type="number" id="maxharga" oninput="datatable()"><br><br>
+        Kategori: <select id="kategori" oninput="datatable()"> 
+            <option hidden value="">pilih kategori...</option>
+            <option value="elektronik">Elektronik</option>
+            <option value="cepatsaji">Cepat Saji</option>
+            <option value="buah">Buah</option>
+            <option value="pakaian">Pakaian</option>
+        </select>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend>Input Data</legend>
+    <table>
+        <thead>
+            <tr>
+                <th><input type="text" id="namainput" placeholder="nama"><br></th>
+                <th><input type="number" id="hargainput" placeholder="harga"><br></th>
+                <th><select id="kategoriinput"> 
+                    <option hidden value="">pilih kategori...</option>
+                    <option value="elektronik">Elektronik</option>
+                    <option value="cepatsaji">Cepat Saji</option>
+                    <option value="buah">Buah</option>
+                    <option value="pakaian">Pakaian</option>
+                </select></th>
+                <th><input type="number" id="stokinput" placeholder="stok"><br></th>
+            </tr>
+        </thead>
+    </table><br>
+    <button onclick="inputdataonClick()">Input</button> 
+</fieldset>
+<br>
+
+    <fieldset>
+    <legend>Tabel Data</legend>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>Nama</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </fieldset>
+   
+</body>
+<script>
+class Produk{
+    constructor (id, kategori, nama, harga, stok){
+        this.id=id,
+        this.kategori=kategori,
+        this.nama=nama,
+        this.harga=harga,
+        this.stok=stok
+    }
+}
+var dataproduk=[
+    new Produk (1581032511991,'Fast Food','Noodle',3500,9),
+    new Produk (1581032542903,'Electronic','Headphone',60000,8),
+    new Produk (1581032560966,'Cloth','Hoodie',300000,7),
+    new Produk (1581032570739,'Fruit','Apple',10000,8)
+]
+var indexdelete=-1
+var indexedit=-1
+
+const inputdataonClick=()=>{
+    var addid=new Date().getTime()
+    var addkategori=document.getElementById('kategoriinput').value
+    var addnama=document.getElementById('namainput').value
+    var addharga=document.getElementById('hargainput').value
+    var addstok=document.getElementById('stokinput').value
+    console.log(addid)
+    if(addnama==""||addharga==null||addkategori==""||addstok==null){
+        alert('coba input semua dulu')
+    }
+    else {
+        dataproduk.push(new Produk (addid,addkategori,addnama,addharga,addstok))
+    }
+    printdata(dataproduk)
+}
+
+const printdata=(data)=>{
+    var output=''
+    data.forEach((val,index) => {
+        if(index==indexdelete){
+            output+=`   <tr>
+                            <td>${val.id}</td>
+                            <td>${val.kategori}</td>
+                            <td>${val.nama}</td>
+                            <td>${val.harga}</td>
+                            <td>${val.stok}</td>
+                            <td>
+                                <button onclick="acceptdelete(${index})">Yes</button>
+                                <button onclick="canceldelete()">No</button>
+                            </td>
+                        </tr>`
+        }
+        else if(index==indexedit){
+            output+=`   <tr>
+                            <td>${val.id}</td>
+                            <td>${val.kategori}</td>
+                            <td><input type="text" id='editnama' value=${dataproduk[indexedit].nama}></td>
+                            <td><input type="number" id='editharga' value=${dataproduk[indexedit].harga}></td>
+                            <td><input type="number" id='editstok' value=${dataproduk[indexedit].stok}></td>
+                            <td>
+                                <button onclick="updatedata(${index})">Save</button>
+                                <button onclick="cancelupdatedata()">Cancel</button>
+                        </tr>`
+        }
+        else{
+        output+= `<tr>
+                    <td>${val.id}</td>
+                    <td>${val.kategori}</td>
+                    <td>${val.nama}</td>
+                    <td>${val.harga}</td>
+                    <td>${val.stok}</td>
+                    <td>
+                                <button onclick="editproduk(${index})">edit</button>
+                                <button onclick="deleteproduk(${index})">delete</button>
+                            </td>
+                </tr>`
+        }
+
+    });
+    document.getElementsByTagName('tbody')[0].innerHTML=output
+}
+printdata(dataproduk)
+
+const editproduk=(indexed)=>{
+    indexedit=indexed
+    console.log(indexed)
+    printdata(dataproduk)
+}
+
+const updatedata=(indexed)=>{
+var newid=dataproduk[indexed].id
+var newkategori=dataproduk[indexed].kategori
+var newnama=document.getElementById('editnama').value
+var newharga=document.getElementById('editharga').value
+var newstok=document.getElementById('editstok').value
+    if(newnama===''){       //kalo nama ga diupdate
+        newnama=dataproduk[indexed].nama        //maka tetep pake nama yang lama
+    }
+    if(newharga===''){
+        newharga=dataproduk[indexed].harga
+    }
+    if(newstok===''){
+        newstok=dataproduk[indexed].stok
+    }
+    dataproduk.splice(indexed,1, new Produk (newid,newkategori,newnama,newharga,newstok))
+    indexedit=-1
+    printdata(dataproduk)
+}
+
+const cancelupdatedata=()=>{
+    indexedit=-1
+    printdata(dataproduk)
+}
+
+const deleteproduk=(indexdel)=>{
+    indexdelete=indexdel
+    printdata(dataproduk)
+}
+
+const acceptdelete=(indexdel)=>{
+    dataproduk.splice(indexdel,1)
+    indexdelete=-1
+    printdata(dataproduk)
+}
+
+const canceldelete=()=>{
+    indexdelete=-1
+    printdata(dataproduk)
+}
+
+function filternama(){
+    var valuenama=document.getElementById('nama').value.toLowerCase()
+    var valuehargamin=document.getElementById('minharga').value
+    var filteredname =[]
+    printdata(filteredname)
+        dataproduk.forEach((val,index)=>{
+            var a=val.nama.toLowerCase()
+            if(a.includes(valuenama)){
+                filteredname.push(val)
+            }
+        })
+        printdata(filteredname)
+}
+
+function filterhargamin(){
+    dataproduk.forEach((val,index)=>{
+            var b=val.harga
+            if(b>=valuehargamin){
+                filteredname.push(val)
+            }
+        })
+}
+// function filterharga(){
+//     var hargamax=document.getElementById('hargamax')
+// }
+
+</script>
+</html>

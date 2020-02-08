@@ -1,0 +1,107 @@
+<html>
+    <script>
+    alert('selamat datang di toko buah kami')
+    var buah=['apel','anggur','berry','pisang'] //data buah harus diluar krn kalo di dalem do maka buah yang sudah di tambah akan terulang datanya dr awal
+    var stock=[5,5,5,5]
+    var harga=[1000,2000,3000,4000]
+    var cartbuah=[]
+    var cartharga=[]
+    var cartqty=[]
+    function daftarbuah(){
+        var output='Daftar list buah\n'
+        for(let i=0;i<buah.length;i++){
+                output+=(i+1)+'. '+buah[i]+' dengan stok '+stock[i]+' Rp.'+harga[i]+'\n'
+            }
+            return(output)
+    }
+    do{
+        do{
+            var menuutama=prompt('1.Daftar buah\n2.tambah buah\n3.hapus buah\n4.beli buah\n5.exit')
+            if(menuutama<1||menuutama>5){
+                alert('salah input menu utama')
+            }
+        } while(menuutama<1||menuutama>5)
+        if(menuutama==1){
+            // var output='Daftar list buah\n'
+            // for(let i=0;i<buah.length;i++){
+            //     output+=(i+1)+'. '+buah[i]+' dengan stok '+stock[i]+' Rp.'+harga[i]+'\n'
+            // }
+            alert(daftarbuah(output))
+        }
+        else if(menuutama==2){
+            var tambahbuah=prompt('masukkan nama buah')
+            var jumlahbuah=prompt('masukkan jumlah buah')
+            var hargabuah=prompt('masukkan harga buah')
+            buah.push(tambahbuah)
+            stock.push(jumlahbuah)
+            harga.push(hargabuah)
+            alert(daftarbuah(output))
+
+        }
+        else if(menuutama==3){
+            // var indexhapusbuah=
+            var output='Daftar list buah :\n'
+                    for(var i=0;i<buah.length;i++){
+                        output+=(i+1)+'. '+buah[i]+', dengan stok '+stok[i]+', harga Rp.'+harga[i]+'\n'
+                    }var indexhapusbuah=prompt(output)-1
+            // prompt(daftarbuah(output))-1
+            var konfirmasihapus=confirm('yakin kamu hapus buah'+buah[indexhapusbuah]+'darisini :')
+            if(konfirmasihapus){
+            buah.splice(indexhapusbuah,1)
+            stock.splice(indexhapusbuah,1)
+            harga.splice(indexhapusbuah,1)
+            alert('berhasil hapus buah')
+            }
+            else{
+                alert('tidak jadi hapus')
+            }
+        }
+        else if(menuutama==4){
+            do{
+                // var output='Daftar list buah\n'
+                // for(let i=0;i<buah.length;i++){
+                // output+=(i+1)+'. '+buah[i]+' dengan stok '+stock[i]+' Rp.'+harga[i]+'\n'
+                // }
+                // alert(output)
+                var pilihanbelanja=prompt(daftarbuah(output))-1
+                do{
+                    var qty=prompt('mau beli '+buah[pilihanbelanja]+' berapa?')
+                    if(qty>stock[pilihanbelanja]){
+                        alert('input ulang, stok tidak mencukupi')
+                    }
+                    else{
+                        stock[pilihanbelanja]-=qty
+                        break
+                    }
+                }while(true)
+                cartbuah.push(buah[pilihanbelanja])
+                cartharga.push(harga[pilihanbelanja])
+                cartqty.push(qty)
+                var konfirmasibelanja=confirm('mau belanja lagi ga?')
+            }
+            while(konfirmasibelanja)
+            var totalharga=0
+            for(let i=0;i<cartharga.length;i++){
+                totalharga+=cartharga[i]*cartqty[i]
+            }
+            var strukbelanja='Struk belanja\n'
+            for(let i=0;i<cartbuah.length;i++){
+                strukbelanja+=(i+1)+'. '+cartbuah[i]+' = '+cartqty[i]+' X Rp.'+cartharga[i]+'= '
+                +(cartqty[i]*cartharga[i])+'\n'
+            }
+            strukbelanja+='=======================================+\n'
+            strukbelanja+='total seluruhnya Rp. '+totalharga
+            alert(strukbelanja)
+        }
+        else{
+            alert('terimakasih telah berkunjung ke toko kami')
+            break
+        }
+
+        var konfirmasikembali=confirm('kembali ke menu utama?')
+        if(!konfirmasikembali){
+            alert('terimakasih telah berkunjung ke toko kami')
+        }
+    }while(konfirmasikembali)
+    </script>
+</html>

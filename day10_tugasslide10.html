@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form id="form"> -->
+    <form name="quiz" method="post" name="buttons" id="quiz" onsubmit="return false">
+        <p>1. Siapakah Presiden ketiga Republik Indonesia</p>
+            <input type="radio" name="Q1" value="correct"> Prof B.J Habibie
+            <input type="radio" name="Q1" value="wrong"> Abdurrahman Wahid
+            <input type="radio" name="Q1" value="wrong"> Ir Soekarno
+            <input type="radio" name="Q1" value="wrong"> Joko Widodo
+        <p>2. Berikut adalah nama-nama bahasa pemrograman, kecuali...</p>
+            <input type="radio" name="Q2" value="wrong"> Phyton
+            <input type="radio" name="Q2" value="correct"> Microbit
+            <input type="radio" name="Q2" value="wrong"> Javascript
+            <input type="radio" name="Q2" value="wrong"> HTML
+        <p>3. Apa judul lagu yang diduga diplagiat oleh lagu 'Sayang' Via Vallen?</p>
+            <input type="radio" name="Q3" value="wrong"> Qing Vei De Yi
+            <input type="radio" name="Q3" value="wrong"> Ting Hay
+            <input type="radio" name="Q3" value="correct"> Mirai E Kiroro
+            <input type="radio" name="Q3" value="wrong"> Hau Siang Hau Siang
+        <p>4. Siapakah sosok dibalik topi Batman?</p>
+            <input type="radio" name="Q4" value="wrong"> Natasha Romanov
+            <input type="radio" name="Q4" value="wrong"> Peter Parker
+            <input type="radio" name="Q4" value="wrong"> Tony Stark
+            <input type="radio" name="Q4" value="correct"> Bruce Wayne
+    </form>
+        <button class="submit" onclick="return handleClick();" type="submit">Submit</button>
+        <h2 id="jumlah"> </h2>
+    <!-- <button onclick="fungsiKu()"> Klik! </button>
+        <p id="jumlah"> Hasil </p> -->
+</body>
+<script>
+function handleClick(){         
+        var amountCorrect = 0;          
+        for(var i = 1; i <= 4; i++) {
+          var radios = document.getElementsByName('Q'+i);
+          for(var j = 0; j < radios.length; j++) {
+            var radio = radios[j];
+            if(radio.value == "correct" && radio.checked) {
+              amountCorrect+=25;
+            }
+          }
+         }
+         document.getElementById("jumlah").innerHTML = 'Nilai Akhir Anda '+amountCorrect                  
+            // alert("Correct Responses: " + amountCorrect);
+          }
+
+
+//     var gradioval=[]
+// function fungsiKu(){
+//     var radioval = gradioval
+//     // let input1=document.getElementsByName("form").value
+//     console.log(fungsiKu())
+// }
+
+
+</script>
+</html>

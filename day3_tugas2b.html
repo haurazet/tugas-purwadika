@@ -1,0 +1,96 @@
+<html>
+    <script>
+    do {
+        var mobilataumotor=(prompt('1.mobil\n2.motor'))
+        if(!(mobilataumotor>0&&mobilataumotor<3)){ //kalau input bukan 1 atau 2 maka alert
+            alert('salah input')
+        }
+    } while(!(mobilataumotor>0&&mobilataumotor<3)){ // kalau input bukan 1 atau 2 maka salah input true agar loop
+        var salahinput=true
+        while(salahinput){
+            var masuk=parseInt(prompt('anda masuk jam berapa? (0-11)'))
+            if(masuk>=0&&masuk<12){
+                salahinput=false
+             }
+            else{
+                alert('salah input masuk')
+             }
+        var salahinput1=true
+        while (salahinput1){
+             var waktuMasuk=prompt('1.AM\n2.PM')
+             if(waktuMasuk>=1&&waktuMasuk<=2){
+                 salahinput1=false
+             }
+             else{
+                 alert('salah input AM/PM')
+             }
+        }
+        var salahinput3=true
+        while(salahinput3){
+            var keluar=parseInt(prompt('anda keluar jam berapa? (0-11)'))
+            if(keluar>=0&&keluar<12){
+                salahinput3=false
+             }
+            else{
+                alert('salah input keluar')
+             }
+         }
+        var salahinput4=true
+        while (salahinput4){
+             var waktuKeluar=prompt('1.AM\n2.PM')
+             if(waktuKeluar>=1&&waktuKeluar<=2){
+                 salahinput4=false
+             }
+             else{
+                 alert('salah input AM/PM')
+             }
+        }
+    }}
+
+
+    // untuk motor atau mobil, apabila lebih dari 0 dan kurang dari 3 maka false
+    // untuk jam masuk, apabila lebih dari = 0 dan kurang dari 12 maka false
+    // untuk am pm masuk, apabila lebih dari 0 dan kurang dari 3 maka false
+    // untuk jam keluar, apabila lebih dari = 0 dan kurang dari 12 maka false
+    // untuk am pm keluar, apabila lebih dari 0 dan kurang dari 3 maka false
+
+
+
+    // var waktuMasuk=prompt('1.AM\n2.PM')
+    // var keluar=parseInt(prompt('anda keluar jam berapa?(1-12)'))
+    // var waktuKeluar=prompt('1.AM\n2.PM')
+    var harga, lamaparkir, kendaraan, tarifParkir
+    
+    if(waktuMasuk==1&&waktuKeluar==1||waktuMasuk==2&&waktuKeluar==2){
+        lamaparkir=keluar-masuk
+    }
+    else if(waktuMasuk==1&&waktuKeluar==2||waktuMasuk==2&&waktuKeluar==1){
+        lamaparkir=(12-masuk)+keluar
+    }
+    
+    if(mobilataumotor==1&&lamaparkir<=2){
+        harga=5000*lamaparkir
+        kendaraan='mobil'
+    }
+    else if(mobilataumotor==1&&lamaparkir>2){
+        harga=(5000*2)+((lamaparkir-2)*1000)
+        kendaraan='mobil'
+    }
+    else if(mobilataumotor==2&&lamaparkir<=2){
+        harga=3000*lamaparkir
+        kendaraan='motor'
+    }
+    else if(mobilataumotor==2&&lamaparkir>2){
+        harga=(3000*2)+((lamaparkir-2)*1000)
+        kendaraan='motor'
+    }
+    if (mobilataumotor==1){
+        tarifParkir='Rp 5.000 pada 2 jam pertama, dan Rp 1.000 setiap jam selanjutnya'
+    }
+    else if(kendaraan=='motor'){
+        tarifParkir='Rp 3.000 pada 2 jam pertama, dan Rp 1.000 setiap jam selanjutnya'
+    }
+    alert('anda parkir pakai '+kendaraan+ ' dengan tarif '+tarifParkir+'\nlama parkir : '+lamaparkir+' jam\ntotal pembayaran : Rp '+harga)
+
+    </script>
+</html>
